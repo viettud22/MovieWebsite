@@ -1,0 +1,177 @@
+<%- include ('partials/header') %>
+
+<div class= "container movie-details">
+  <div class = "row justify-content-center">
+    <div class = "col-lg-4 left-box">
+      <% var url = "http://image.tmdb.org/t/p/w342//" + data[0].poster_path;%>
+      <img src="<%=url%>">
+    </div>
+    <div class = "col-lg-6 right-box">
+      <h1 class = "movie-title"><%= data[0].title ;%></h1>
+      <h6 class ="date"><%=data[0].release_date.substring(0,4);%></h6>
+      <div class = "info">
+        <p> 
+          <% var productionString = ""; 
+             data[0].production_companies.forEach(function(production){ 
+             productionString += production.name + ", "; 
+             }); 
+             productionString = productionString.slice(0,-2); %>
+          <strong>Production Company:</strong> <%=productionString %>
+        </p>  
+
+        <p> 
+          <% var countryString = ""; %>
+          <% data[0].production_countries.forEach(function(country){ %>
+          <%  countryString += country.name + ", "; %> 
+          <% }); %>
+          <% countryString = countryString.slice(0,-2); %>
+          <strong>Countries:</strong> <%=countryString %>
+        </p>  
+    
+        <p>
+          <% var genreString = ""; %>
+          <% data[0].genres.forEach(function(genre){ %>
+          <%  genreString += genre.name + ", "; %> 
+          <% }); %>
+          <% genreString = genreString.slice(0,-2); %>
+          <strong>Genres: </strong><%=genreString %>
+        </p>
+
+        <p>
+          <% var languageString = ""; %>
+          <% data[0].spoken_languages.forEach(function(language){ %>
+          <%  languageString += language.name + ", "; %> 
+          <% }); %>
+          <% languageString = languageString.slice(0,-2); %>
+          <strong>Languages:</strong> <%=languageString %>
+        </p>
+
+        <p>
+          <strong>Release Date: </strong> <%= data[0].release_date %>
+        </p>
+
+        <p>
+          <strong>Runtime: </strong> <%=data[0].runtime%> min
+        </p>
+      </div>
+    </div>
+    
+    <% url = "https://www.youtube.com/embed/" + data[1].results[0].key %>
+    <div class = "trailer">
+      <iframe width="854" height="480"
+      src="<%=url%>" frameborder="0" allowfullscreen> 
+      </iframe>
+    </div>
+
+  </div>
+
+  <h3 class = "cast">Overview</h3>
+  <p class="overview"><%=data[0].overview%></p>
+  
+<h3 class= "cast">Similar Movies</h3>
+  <div class="row series">
+
+    <% if(data[3].results.length <6){
+      size = data[3].results.length;
+    } else {
+      size = 6;
+    } %>
+
+    <% for (var i = 0; i < size; i = i+2){ %>
+      <div class = "col-lg-4">
+        <div class = "row">
+          <div class ="col-6">
+            <% var url = "http://image.tmdb.org/t/p/w342//" + data[3].results[i].poster_path;%>
+            <a href="/results/<%=data[3].results[i].id%>"><img src="<%=url%>"></a>
+            
+            <div>
+              <a href="/results/<%=data[3].results[i].id%>"><h5 class ="movie-title"><%=data[3].results[i].title%></h5></a>
+              <h6 class ="date"><%=data[3].results[i].release_date.substring(0,4)%></h6>
+            </div>
+          </div>
+          <div class ="col-6">
+            <% url= "http://image.tmdb.org/t/p/w342//" + data[3].results[i+1].poster_path; %>
+            <a href="/results/<%=data[3].results[i+1].id%>"><img src="<%=url%>"></a>
+            <div>
+              <a href="/results/<%=data[3].results[i+1].id%>"><h5 class ="movie-title"><%=data[3].results[i+1].title%></h5></a>
+              <h6 class ="date"><%=data[3].results[i+1].release_date.substring(0,4)%></h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% } %>
+  </div>
+  <h3 class = "cast">Cast</h3>
+  <div class="row series">
+    <% var size = data[2].cast.length - 1; %>
+    <% for (var i = 0; i < size; i = i+2){ %>
+      
+			<div class = "col-lg-4">
+				<div class = "row">
+					<div class ="col-6">
+            <% if (data[2].cast[i].profile_path === null) { %>
+                <img src="http://image.phimmoi.net/profile/default/male/medium.jpg">
+            <%  } else {
+                var url = "http://image.tmdb.org/t/p/w342//" + data[2].cast[i].profile_path; %>
+                <img src="<%=url%>">
+
+              <%} %>
+            <div>
+              <span class ="actor-name"><%=data[2].cast[i].name%></span> <br/>
+              <span class = "character-name"><%=data[2].cast[i].character%></span>
+						</div>
+					</div>
+					<div class ="col-6">
+            <% if (data[2].cast[i+1].profile_path === null) { %>
+              <img src="http://image.phimmoi.net/profile/default/male/medium.jpg">
+            <% } else {
+              var url = "http://image.tmdb.org/t/p/w342//" + data[2].cast[i+1].profile_path; %>
+              <img src="<%=url%>">
+
+            <%} %>
+            <div>
+              <span class ="actor-name"><%=data[2].cast[i+1].name%></span> <br/>
+              <span class = "character-name"><%=data[2].cast[i+1].character%></span>
+						</div>
+					</div>
+				</div>
+			</div>
+    <% } %>
+	</div>
+  
+</div>
+
+<div class= "container comment">
+  <h3>Movie reviews</h3>
+  <%data[4].forEach(function(comment){%>
+    <div class = "commentBox">
+      <h4><%=comment.name%></h4>
+      <p><%=comment.body%></p>
+    </div>
+  <%});%>
+  
+  <%data[5].results.forEach(function(comment){%>
+    <div class = "commentBox">
+      <h4><%=comment.author%></h4>
+      <p><%=comment.content%></p>
+    </div>
+  <%});%>
+</div>
+
+<div class="container comment">
+  <h3>Submit your review</h3>
+<form class = "commentForm" action="/comments/<%=data[0].id%>" method="POST">
+  <div class = "form-group">
+    <label>Name</label>
+    <input type="text" name="comment[name]" class="form-control">
+  </div>
+  
+  <div class = "form-group">
+    <label>Review</label>
+    <textarea name="comment[body]" cols="30" rows="5" class="form-control"></textarea>
+  </div>
+<button type="submit" class="btn btn-outline-light">Submit</button>
+
+</form>
+</div>
+<%- include ('partials/footer') %>

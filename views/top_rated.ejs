@@ -1,0 +1,106 @@
+<%- include ('partials/header') %>
+<div class="container series">
+	<h3>Top Rated Movies</h3>
+	<div class="row">
+		<% for (var i = 0; i < data[0].results.length - 1; i = i+2){ %>
+			<div class = "col-lg-4">
+				<div class = "row">
+					<div class ="col-6">
+						<%while(data[0].results[i].poster_path === null ){
+							if(i == data[0].results.length -1){
+								break;
+							}
+							i++;
+						} %>
+						<%if(data[0].results[i].poster_path === null){ %>
+							</div>
+							</div>
+							</div>
+							<%break;
+						}%>	
+
+						<% var url = "http://image.tmdb.org/t/p/w342//" + data[0].results[i].poster_path;%>
+						<a href="/results/<%=data[0].results[i].id%>"><img src="<%=url%>"></a>
+						
+						<div>
+							<a href="/results/<%=data[0].results[i].id%>"><h5 class ="movie-title"><%=data[0].results[i].title%></h5></a>
+							<%if(data[0].results[i].release_date !== undefined){ %>
+								<h6 class ="date"><%=data[0].results[i].release_date.substring(0,4)%></h6>
+							<%} %>
+						</div>
+					</div>
+					<div class ="col-6">
+						<%if((i+1) >= data[0].results.length){ %>
+							</div>
+							</div>
+							</div>
+							<%break;
+						}%>						
+						<%while(data[0].results[i+1].poster_path === null){
+							if(i == data[0].results.length -2){
+								break;
+							}
+							i++;
+						} %>
+
+						<%if(data[0].results[i+1].poster_path === null){ %>
+							</div>
+							</div>
+							</div>
+							<%break;
+						}%>	
+						<% url= "http://image.tmdb.org/t/p/w342//" + data[0].results[i+1].poster_path; %>
+						<a href="/results/<%=data[0].results[i+1].id%>"><img src="<%=url%>"></a>
+						<div>
+							<a href="/results/<%=data[0].results[i+1].id%>"><h5 class ="movie-title"><%=data[0].results[i+1].title%></h5></a>
+							<%if(data[0].results[i+1].release_date !== undefined){ %>
+								<h6 class ="date"><%=data[0].results[i+1].release_date.substring(0,4)%></h6>
+
+							<%} %>
+						</div>
+					</div>
+				</div>
+			</div>
+		<% } %>
+	</div>
+	<nav aria-label="Page navigation example">
+		<ul class="pagination justify-content-center">
+			<%var type = "toprated";%>
+			<%if(data[1].toString() === "1"){%>
+				<li class="page-item disable"><a class="page-link">First</a></li>
+
+				<li class="page-item disable"><a class="page-link">Previous</a></li>
+
+				<li class="page-item active"><a class="page-link">1/<%=data[0].total_pages%></a></li>
+
+				<li class="page-item"><a class="page-link" href="/<%=type%>/2">Next</a></li>
+			
+				<li class="page-item"><a class="page-link" href="/<%=type%>/<%=data[0].total_pages%>">Last</a></li>
+
+			<%} else if (data[1].toString() === data[0].total_pages.toString()){%>
+				<li class="page-item"><a class="page-link" href="/<%=type%>/1">First</a></li>
+
+				<li class="page-item "><a class="page-link" href="/<%=type%>/<%=data[0].total_pages - 1%>">Previous</a></li>
+
+				<li class="page-item active"><a class="page-link"><%=data[0].total_pages%>/<%=data[0].total_pages%></a></li>
+
+				<li class="page-item disable"><a class="page-link">Next</a></li>
+			
+				<li class="page-item disable"><a class="page-link">Last</a></li>
+			<%} else {%> 
+				<li class="page-item"><a class="page-link" href="/<%=type%>/1">First</a></li>
+
+				<li class="page-item "><a class="page-link" href="/<%=type%>/<%=parseInt(data[1]) - 1%>">Previous</a></li>
+
+				<li class="page-item active"><a class="page-link"><%=data[1]%>/<%=data[0].total_pages%></a></li>
+
+				<li class="page-item"><a class="page-link" href="/<%=type%>/<%=parseInt(data[1]) + 1%>">Next</a></li>
+			
+				<li class="page-item"><a class="page-link" href="/<%=type%>/<%=data[0].total_pages%>">Last</a></li>
+			<%}%>
+
+
+		</ul>
+	</nav>
+</div>
+<%- include ('partials/footer') %>

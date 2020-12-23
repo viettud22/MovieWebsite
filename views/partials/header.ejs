@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Movie Application</title>
+	<script
+	src="https://code.jquery.com/jquery-3.4.1.min.js"
+	integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+	crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+	<link rel="stylesheet" type="text/css" href="/app.css">
+	<script language="JavaScript" type="text/javascript">
+		$(document).ready(function(){
+		  $('.carousel').carousel({
+			interval: 2000
+		  })
+		});    
+	</script>
+</head>
+<body>
+	<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+		<div class= "container">
+			<a class="navbar-brand" href="/">Movie App   <i class="fas fa-video"></i></a>
+		  	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
+		  	</button>
+
+		  	<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+		    	<ul class="nav navbar-nav mr-auto mt-2 mt-lg-0">
+		      		<li class="nav-item active">
+		        		<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+		      		</li>
+
+					<li class="nav-item active dropdown">
+						<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">Genres <b class="caret"></b></a>
+						<ul class="dropdown-menu multi-column columns-2">
+							<div class="row">
+								<div class="col-sm-6">
+									<ul class="multi-column-dropdown">
+										<a href="/genres/18/1" class="dropdown-item">Action</a>
+										<a href="/genres/12/1" class="dropdown-item">Adventure</a>
+										<a href="/genres/16/1" class="dropdown-item">Animation</a>
+										<a href="/genres/35/1" class="dropdown-item">Comedy</a>
+										<a href="/genres/80/1" class="dropdown-item">Crime</a>
+										<a href="/genres/99/1" class="dropdown-item">Documentary</a>
+										<a href="/genres/18/1" class="dropdown-item">Drama</a>
+										<a href="/genres/10751/1" class="dropdown-item">Family</a>
+										<a href="/genres/14/1" class="dropdown-item">Fantasy</a>
+										<a href="/genres/36/1" class="dropdown-item">History</a>
+									</ul>
+								</div>
+								<div class="col-sm-6">
+									<ul class="multi-column-dropdown">
+										<a href="/genres/27/1" class="dropdown-item">Horror</a>
+										<a href="/genres/10402/1" class="dropdown-item">Music</a>
+										<a href="/genres/9648/1" class="dropdown-item">Mystery</a>
+										<a href="/genres/10749/1" class="dropdown-item">Romance</a>
+										<a href="/genres/878/1" class="dropdown-item">Science Fiction</a>
+										<a href="/genres/10770/1" class="dropdown-item">TV Movie</a>
+										<a href="/genres/53/1" class="dropdown-item">Thriller</a>
+										<a href="/genres/10752/1" class="dropdown-item">War</a>
+										<a href="/genres/37/1" class="dropdown-item">Western</a>
+									</ul>
+								</div>
+							</div>
+						</ul>
+					</li>
+					<li class="dropdown">
+		    	</ul>
+		    	<form class="form-inline my-2 my-lg-0" action="/search/1" method = "GET">
+		      		<input name="searchName" class="form-control mr-sm-2" type="search" placeholder="Search">
+		      		<button class="btn btn-outline-light my-2 my-sm-0" type="submit" value = "Search">Search</button>
+		    	</form>
+		  	</div>
+	  	</div>
+	</nav>
+	
+

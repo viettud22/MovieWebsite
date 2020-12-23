@@ -1,0 +1,16 @@
+<%- include ('partials/header') %>
+
+		<% comments.forEach(function(comment){ %>
+		<div class = "ui main text container segment">
+		<div class = "ui huge header"><%=comment.name%></div>	
+			<div class ="content">
+				<span><%=comment.created.toDateString()%></span>
+			</div>
+
+			<div class = "description">
+				<span><%=comment.body%></span>
+			</div>
+		</div>
+
+		<% }) %>
+<%- include ('partials/footer') %>
